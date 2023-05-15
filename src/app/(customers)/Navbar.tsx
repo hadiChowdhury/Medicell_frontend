@@ -59,18 +59,13 @@ const Navbar: React.FC = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/order" className="hover:text-gray-300">
-                                Customers
+                            <Link href="/orders" className="hover:text-gray-300">
+                                Orders
                             </Link>
                         </li>
                         <li>
-                            <Link href="/order" className="hover:text-gray-300">
-                                Deliveryman
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/order" className="hover:text-gray-300">
-                                Employee
+                            <Link href="/users" className="hover:text-gray-300">
+                                User List
                             </Link>
                         </li>
                         <li>

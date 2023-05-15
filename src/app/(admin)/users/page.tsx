@@ -1,41 +1,40 @@
 "use client"
-import { Product } from '@/interfaces';
+import { Users } from '@/interfaces';
 import axiosInstance from '@/lib/axiosInstance';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const ProductCard: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+const UserInfo: React.FC = () => {
+  const [users, setUsers] = useState<Users[]>([]);
 
   useEffect(() => {
-    fetchProducts();
+    fetchUsers();
   }, []);
 
-  const fetchProducts = async () => {
+  const fetchUsers = async () => {
     try {
-      const response = await axiosInstance.get('products');
-      setProducts(response.data);
+      const response = await axiosInstance.get('users');
+      setUsers(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleDeleteProduct = async (productId: number) => {
+  const handleDeleteProduct = async (userId: number) => {
     try {
-      await axiosInstance.delete(`product/${productId}`);
-      toast.success('Product deleted.');
+      await axiosInstance.delete(`user/${userId}`);
+      toast.success('User deleted.');
   
       // Refresh the product list
-      fetchProducts();
+      fetchUsers();
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    
     <div className="flex flex-wrap justify-center">
       <table className="min-w-full divide-y divide-gray-200">
         <thead>
@@ -44,42 +43,40 @@ const ProductCard: React.FC = () => {
               Name
             </th>
             <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Quantity
+              Gender
             </th>
             <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Description
+              DoB
             </th>
             <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Price
+              Email
             </th>
             <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Availability
+              Phone
+            </th>
+            <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Address
             </th>
             <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> 
-  <a href='/addproducts' className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600">
-    Add Product
-  </a>
-</th>
+            <a href='/adduser' className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600">
+    Add Users
+  </a></th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {products.map((product) => (
-            <tr key={product.Id}>
-              <td className="px-6 py-4 whitespace-nowrap">{product.Name}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{product.Quantity}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{product.Description}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{product.Price}</td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {product.IsAvailable ? (
-                  <span className="text-green-500">In Stock</span>
-                ) : (
-                  <span className="text-red-500">Out of Stock</span>
-                )}
-              </td>
+          {users.map((user) => (
+            <tr key={user.Id}>
+              <td className="px-6 py-4 whitespace-nowrap">{user.FirstName}</td>
+              <td className="px-6 py-4 whitespace-nowrap"> { user.Gender === 0 ? "Male" : "Female" }</td>
+              <td className="px-6 py-4 whitespace-nowrap">{new Date(user.DateOfBirth).toLocaleDateString()}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{user.Email}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{user.Phone}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{user.Address}</td>
+
               <td className="px-6 py-4 whitespace-nowrap">
                 <button
                   className="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-600"
-                  onClick={() => handleDeleteProduct(product.Id)}
+                  onClick={() => handleDeleteProduct(user.Id)}
                 >
                   Delete
                 </button>
@@ -97,4 +94,4 @@ const ProductCard: React.FC = () => {
   );
 };
 
-export default ProductCard
+export default UserInfo

@@ -36,7 +36,7 @@ const LoginForm: React.FC = () => {
             } else {
                 // Handle the response data
                 localStorage.setItem('token', response.data.TKey);
-                window.location.href = './dashboard';
+                window.location.href = '/dashboard';
             }
             // Redirect or perform any other actions as needed
         } catch (error) {

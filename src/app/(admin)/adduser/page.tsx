@@ -30,7 +30,7 @@ const RegistrationForm: React.FC = () => {
         e.preventDefault();
         axiosInstance.post('user', formData)
             .then(response => {
-                window.location.href = '/login';
+                window.location.href = '/users';
             })
             .catch(error => {
                 // Handle registration error
@@ -40,7 +40,7 @@ const RegistrationForm: React.FC = () => {
 
     return (
         <div className="max-w-md p-4 mx-auto mt-8 bg-white rounded-lg shadow-md">
-            <h2 className="mb-4 text-2xl font-bold">Registration</h2>
+            <h2 className="mb-4 text-2xl font-bold">Add Users</h2>
             <form onSubmit={handleSubmit}>
                 <div className="flex gap-2">
                     <div className="mb-4">
@@ -156,13 +156,19 @@ const RegistrationForm: React.FC = () => {
                     />
                 </div>
                 <div className="mt-6">
-                    <button
-                        type="submit"
-                        className="w-full px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-                    >
-                        Register
-                    </button>
-                </div>
+  <div className="flex flex-col space-y-2">
+    <button
+      type="submit"
+      className="w-full px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+    >
+      Register
+    </button>
+    <a href="/users" className="flex mt-10 text-sm font-semibold text-indigo-600">
+                <svg className="w-4 mr-2 text-indigo-600 fill-current" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" /></svg>
+                Go Back
+            </a>
+  </div>
+</div>
             </form>
         </div>
     );

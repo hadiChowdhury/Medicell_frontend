@@ -9,3 +9,27 @@ export interface Product {
     CategoryId: number;
     CompanyId: number;
 }
+
+export interface Orders{
+    Id: number;
+    OderDate: string;
+    Total:number;
+    OrderedBy: number;
+    UserFirstName: string;
+}
+export interface Users{
+    Id: number;
+    FirstName: string;
+    LastName: string;
+    Gender: number;
+    DateOfBirth: string;
+    Email:string;
+    Phone: string;
+    Address: string;
+    Role: string;
+}
+export type Props = {
+    params: {
+        id: string;
+    }
+};
